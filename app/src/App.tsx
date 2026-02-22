@@ -112,16 +112,22 @@ function App() {
   }, [presets])
 
   const toggleSound = async (id: string) => {
+    console.log('toggleSound called:', id, 'current state:', soundStates[id])
+
     // Resume AudioContext if suspended
     if (audioContextRef.current?.state === 'suspended') {
+      console.log('Resuming suspended AudioContext')
       await audioContextRef.current.resume()
     }
+    console.log('AudioContext state:', audioContextRef.current?.state)
 
     const newState = !soundStates[id].playing
 
     if (newState) {
+      console.log('Playing sound:', id, 'volume:', soundStates[id].volume)
       playSound(id, soundStates[id].volume)
     } else {
+      console.log('Stopping sound:', id)
       stopSound(id)
     }
 
@@ -137,18 +143,42 @@ function App() {
       [id]: { ...prev[id], volume }
     }))
 
-    if (soundStates[id].playing && oscillatorsRef.current[id]) {
-      oscillatorsRef.current[id].gain.gain.value = volume / 100
+    if (oscillatorsRef.current[id]) {
+      // Update gain value based on sound type (same as in playSound)
+      let gainValue = volume / 100
+      switch (id) {
+        case 'rain': gainValue = volume / 150; break
+        case 'ocean': gainValue = volume / 120; break
+        case 'forest': gainValue = volume / 140; break
+        case 'fire': gainValue = volume / 130; break
+        case 'cafe': gainValue = volume / 110; break
+        case 'wind': gainValue = volume / 140; break
+        case 'birds': gainValue = volume / 180; break
+        case 'thunder': gainValue = volume / 100; break
+        case 'stream': gainValue = volume / 130; break
+        case 'night': gainValue = volume / 200; break
+      }
+      oscillatorsRef.current[id].gain.gain.value = gainValue
+      console.log('Updated gain to:', gainValue)
     }
   }
 
   const playSound = (id: string, volume: number) => {
-    if (!audioContextRef.current) return
+    console.log('playSound called:', id, 'volume:', volume)
+
+    if (!audioContextRef.current) {
+      console.error('AudioContext not initialized')
+      return
+    }
 
     const sound = SOUNDS.find(s => s.id === id)
-    if (!sound) return
+    if (!sound) {
+      console.error('Sound not found:', id)
+      return
+    }
 
     const ctx = audioContextRef.current
+    console.log('Creating audio nodes for:', sound.name)
 
     // Create white noise using buffer source
     const bufferSize = ctx.sampleRate * 2
@@ -234,9 +264,11 @@ function App() {
     filter.connect(gainNode)
     gainNode.connect(ctx.destination)
 
+    console.log('Starting noise source, gain:', gainNode.gain.value)
     noise.start()
 
     oscillatorsRef.current[id] = { osc: noise as unknown as OscillatorNode, gain: gainNode }
+    console.log('Sound started successfully:', id)
   }
 
   const stopSound = (id: string) => {
