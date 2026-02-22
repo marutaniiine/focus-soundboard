@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background circle -->
+  <circle cx="50" cy="50" r="48" fill="url(#grad)"/>
+
+  <!-- Headphones -->
+  <path d="M 30 35 Q 30 20 50 20 Q 70 20 70 35"
+        fill="none" stroke="white" stroke-width="6" stroke-linecap="round"/>
+
+  <!-- Left ear cup -->
+  <rect x="22" y="35" width="16" height="24" rx="4" fill="white" opacity="0.9"/>
+
+  <!-- Right ear cup -->
+  <rect x="62" y="35" width="16" height="24" rx="4" fill="white" opacity="0.9"/>
+
+  <!-- Sound waves -->
+  <path d="M 15 50 Q 12 50 12 47"
+        fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+  <path d="M 10 50 Q 6 50 6 45"
+        fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+
+  <path d="M 85 50 Q 88 50 88 47"
+        fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+  <path d="M 90 50 Q 94 50 94 45"
+        fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+</svg>

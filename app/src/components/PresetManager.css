@@ -1,0 +1,178 @@
+.preset-manager {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.preset-title {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 16px 0;
+  text-align: center;
+}
+
+.preset-save-btn {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3));
+  border: 1px solid rgba(102, 126, 234, 0.5);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 16px;
+}
+
+.preset-save-btn:hover {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.4), rgba(118, 75, 162, 0.4));
+  transform: translateY(-2px);
+}
+
+.preset-input-group {
+  margin-bottom: 16px;
+}
+
+.preset-input {
+  width: 100%;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 16px;
+  margin-bottom: 8px;
+  transition: all 0.2s ease;
+}
+
+.preset-input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(102, 126, 234, 0.5);
+}
+
+.preset-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.preset-input-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.preset-confirm-btn,
+.preset-cancel-btn {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.preset-confirm-btn {
+  background: linear-gradient(135deg, rgba(34, 193, 195, 0.3), rgba(45, 253, 144, 0.3));
+  border-color: rgba(34, 193, 195, 0.5);
+}
+
+.preset-confirm-btn:hover {
+  background: linear-gradient(135deg, rgba(34, 193, 195, 0.4), rgba(45, 253, 144, 0.4));
+}
+
+.preset-cancel-btn {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.preset-cancel-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.preset-list {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.preset-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.preset-list::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+}
+
+.preset-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.preset-list::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.preset-empty {
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  padding: 20px;
+  font-size: 16px;
+}
+
+.preset-item {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.preset-load-btn {
+  flex: 1;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+}
+
+.preset-load-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(102, 126, 234, 0.5);
+  transform: translateX(4px);
+}
+
+.preset-name {
+  font-weight: 500;
+}
+
+.preset-icon {
+  opacity: 0.7;
+  font-size: 14px;
+}
+
+.preset-delete-btn {
+  padding: 12px;
+  background: rgba(255, 107, 107, 0.2);
+  border: 1px solid rgba(255, 107, 107, 0.3);
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.preset-delete-btn:hover {
+  background: rgba(255, 107, 107, 0.3);
+  border-color: rgba(255, 107, 107, 0.5);
+  transform: scale(1.05);
+}

@@ -1,0 +1,128 @@
+.timer {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.timer-title {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 16px 0;
+  text-align: center;
+}
+
+.timer-display {
+  position: relative;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.timer-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3));
+  transition: width 1s linear;
+  border-radius: 12px 0 0 12px;
+}
+
+.timer-time {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  font-size: 36px;
+  font-weight: 700;
+  font-family: 'Monaco', 'Courier New', monospace;
+  display: block;
+  text-align: center;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.timer-input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 16px;
+}
+
+.timer-minutes-input {
+  width: 80px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 18px;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.timer-minutes-input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(102, 126, 234, 0.5);
+}
+
+.timer-minutes-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.timer-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.timer-btn {
+  flex: 1;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.timer-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+.timer-btn:active {
+  transform: translateY(0);
+}
+
+.timer-btn.start {
+  background: linear-gradient(135deg, rgba(34, 193, 195, 0.3), rgba(45, 253, 144, 0.3));
+  border-color: rgba(34, 193, 195, 0.5);
+}
+
+.timer-btn.start:hover {
+  background: linear-gradient(135deg, rgba(34, 193, 195, 0.4), rgba(45, 253, 144, 0.4));
+}
+
+.timer-btn.pause {
+  background: linear-gradient(135deg, rgba(251, 200, 102, 0.3), rgba(255, 107, 107, 0.3));
+  border-color: rgba(251, 200, 102, 0.5);
+}
+
+.timer-btn.pause:hover {
+  background: linear-gradient(135deg, rgba(251, 200, 102, 0.4), rgba(255, 107, 107, 0.4));
+}
+
+.timer-btn.reset:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+}
