@@ -14,11 +14,16 @@ function SoundControl({ sound, state, onToggle, onVolumeChange }: SoundControlPr
     onVolumeChange(volume)
   }
 
+  const handleToggle = () => {
+    console.log('SoundControl button clicked:', sound.name)
+    onToggle()
+  }
+
   return (
     <div className={`sound-control ${state.playing ? 'active' : ''}`}>
       <button
         className="sound-toggle"
-        onClick={onToggle}
+        onClick={handleToggle}
         aria-label={`${sound.name}を${state.playing ? '停止' : '再生'}`}
       >
         <span className="sound-icon">{sound.icon}</span>
