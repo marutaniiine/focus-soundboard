@@ -111,7 +111,12 @@ function App() {
     localStorage.setItem('focus-soundboard-presets', JSON.stringify(userPresets))
   }, [presets])
 
-  const toggleSound = (id: string) => {
+  const toggleSound = async (id: string) => {
+    // Resume AudioContext if suspended
+    if (audioContextRef.current?.state === 'suspended') {
+      await audioContextRef.current.resume()
+    }
+
     const newState = !soundStates[id].playing
 
     if (newState) {
@@ -231,7 +236,12 @@ function App() {
     setPresets(prev => [...prev, preset])
   }
 
-  const loadPreset = (preset: Preset) => {
+  const loadPreset = async (preset: Preset) => {
+    // Resume AudioContext if suspended
+    if (audioContextRef.current?.state === 'suspended') {
+      await audioContextRef.current.resume()
+    }
+
     // Stop all current sounds
     stopAll()
 
