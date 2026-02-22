@@ -149,59 +149,94 @@ function App() {
     if (!sound) return
 
     const ctx = audioContextRef.current
-    const oscillator = ctx.createOscillator()
+
+    // Create white noise using buffer source
+    const bufferSize = ctx.sampleRate * 2
+    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate)
+    const data = buffer.getChannelData(0)
+
+    for (let i = 0; i < bufferSize; i++) {
+      data[i] = Math.random() * 2 - 1
+    }
+
+    const noise = ctx.createBufferSource()
+    noise.buffer = buffer
+    noise.loop = true
+
     const gainNode = ctx.createGain()
     const filter = ctx.createBiquadFilter()
 
-    // Different sound types
+    // Different sound types with appropriate filtering
     switch (id) {
       case 'rain':
+        filter.type = 'bandpass'
+        filter.frequency.value = 1000
+        filter.Q.value = 0.5
+        gainNode.gain.value = volume / 150
+        break
       case 'ocean':
-      case 'forest':
-      case 'wind':
-      case 'stream':
-        oscillator.type = 'sawtooth'
         filter.type = 'lowpass'
+        filter.frequency.value = 500
+        filter.Q.value = 1
+        gainNode.gain.value = volume / 120
+        break
+      case 'forest':
+        filter.type = 'bandpass'
         filter.frequency.value = 800
+        filter.Q.value = 0.3
+        gainNode.gain.value = volume / 140
         break
       case 'fire':
+        filter.type = 'lowpass'
+        filter.frequency.value = 300
+        filter.Q.value = 0.5
+        gainNode.gain.value = volume / 130
+        break
       case 'cafe':
-        oscillator.type = 'triangle'
         filter.type = 'bandpass'
-        filter.frequency.value = 600
+        filter.frequency.value = 1500
+        filter.Q.value = 0.4
+        gainNode.gain.value = volume / 110
+        break
+      case 'wind':
+        filter.type = 'highpass'
+        filter.frequency.value = 400
+        filter.Q.value = 0.3
+        gainNode.gain.value = volume / 140
         break
       case 'birds':
-      case 'night':
-        oscillator.type = 'sine'
         filter.type = 'highpass'
         filter.frequency.value = 2000
+        filter.Q.value = 2
+        gainNode.gain.value = volume / 180
         break
       case 'thunder':
-        oscillator.type = 'sawtooth'
         filter.type = 'lowpass'
-        filter.frequency.value = 200
+        filter.frequency.value = 150
+        filter.Q.value = 0.8
+        gainNode.gain.value = volume / 100
+        break
+      case 'stream':
+        filter.type = 'bandpass'
+        filter.frequency.value = 1200
+        filter.Q.value = 0.6
+        gainNode.gain.value = volume / 130
+        break
+      case 'night':
+        filter.type = 'bandpass'
+        filter.frequency.value = 3000
+        filter.Q.value = 3
+        gainNode.gain.value = volume / 200
         break
     }
 
-    oscillator.frequency.value = sound.frequency
-    gainNode.gain.value = volume / 100
-
-    oscillator.connect(filter)
+    noise.connect(filter)
     filter.connect(gainNode)
     gainNode.connect(ctx.destination)
 
-    oscillator.start()
+    noise.start()
 
-    oscillatorsRef.current[id] = { osc: oscillator, gain: gainNode }
-
-    // Add subtle frequency modulation for more natural sound
-    const lfo = ctx.createOscillator()
-    lfo.frequency.value = 0.5 + Math.random() * 2
-    const lfoGain = ctx.createGain()
-    lfoGain.gain.value = sound.frequency * 0.05
-    lfo.connect(lfoGain)
-    lfoGain.connect(oscillator.frequency)
-    lfo.start()
+    oscillatorsRef.current[id] = { osc: noise as unknown as OscillatorNode, gain: gainNode }
   }
 
   const stopSound = (id: string) => {
